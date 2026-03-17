@@ -6,18 +6,16 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
-    public WebDriver driver;
+    protected WebDriver driver;
 
     @BeforeMethod
-    public void setup() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-
-        driver.get("https://www.saucedemo.com/");
+    public void setUp() {
+        DriverManager.initDriver();
+        driver = DriverManager.getDriver();
     }
 
-//    @AfterMethod
-//    public void teardown() {
-//        driver.quit();
-//    }
+    @AfterMethod
+    public void tearDown() {
+        DriverManager.quitDriver();
+    }
 }

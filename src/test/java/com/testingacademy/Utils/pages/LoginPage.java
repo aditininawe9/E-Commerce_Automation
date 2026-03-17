@@ -1,14 +1,22 @@
 package com.testingacademy.Utils.pages;
 
+import com.testingacademy.Utils.base.BaseTest;
 import com.testingacademy.Utils.utils.WaitHelper;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginPage{
+import java.time.Duration;
+
+public class LoginPage extends BaseTest {
     WebDriver driver;
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     By username = By.id("user-name");
@@ -16,11 +24,22 @@ public class LoginPage{
     By loginButton = By.id("login-button");
 
     public void login(String user, String pass) {
-        WaitHelper helper = new WaitHelper(driver);
         driver.findElement(username).sendKeys(user);
         driver.findElement(password).sendKeys(pass);
 
         driver.findElement(loginButton).click();
-        //helper.waitForElement(loginButton);
+    }
+
+    public void handlePasswordAlert() {
+        try {
+            Thread.sleep(2000); // small wait for alert
+
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+            alert.accept();
+
+        } catch (Exception e) {
+            System.out.println("No alert present");
+        }
     }
 }

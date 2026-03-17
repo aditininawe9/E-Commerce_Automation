@@ -12,10 +12,15 @@ public class LoginTest extends BaseTest {
     public void loginAndAddProduct() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login("standard_user","secret_sauce");
+        loginPage.handlePasswordAlert();
 
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
         InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.setAddBackpack();
         inventoryPage.setCart();
+//        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/cart.html");
+
+        CartPage cartPage = new CartPage(driver);
+        cartPage.removeProduct();
     }
 }
