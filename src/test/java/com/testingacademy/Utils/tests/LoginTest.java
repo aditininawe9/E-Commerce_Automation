@@ -18,9 +18,16 @@ public class LoginTest extends BaseTest {
         InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.setAddBackpack();
         inventoryPage.setCart();
-//        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/cart.html");
 
         CartPage cartPage = new CartPage(driver);
         cartPage.removeProduct();
+    }
+
+    @Test
+    public void invalidLoginTest() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("wrong_user", "wrong_pass");
+        String error = loginPage.getErrorMessage();
+        Assert.assertEquals(error, "Epic sadface: Username and password do not match any user in this service");
     }
 }

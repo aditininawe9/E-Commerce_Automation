@@ -30,6 +30,11 @@ public class LoginPage extends BaseTest {
         driver.findElement(loginButton).click();
     }
 
+    By errorMessage = By.xpath("//h3[@data-test='error']");
+    public String getErrorMessage() {
+        return driver.findElement(errorMessage).getText();
+    }
+
     public void handlePasswordAlert() {
         try {
             Thread.sleep(2000); // small wait for alert
