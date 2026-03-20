@@ -18,7 +18,11 @@ public class CartPage {
     By removeElement = By.id("remove-sauce-labs-backpack");
 
     public void removeProduct() {
-        WaitHelper.waitForElementClickable(driver, removeElement).click();
-        driver.findElement(removeElement).click();
+        try {
+            WaitHelper.waitForElementClickable(driver, removeElement).click();
+            driver.findElement(removeElement).click();
+        }catch(Exception e) {
+            driver.findElement(removeElement).click();
+        }
     }
 }

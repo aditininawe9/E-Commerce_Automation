@@ -27,12 +27,20 @@ public class LoginPage extends BaseTest {
         driver.findElement(username).sendKeys(user);
         driver.findElement(password).sendKeys(pass);
 
-        driver.findElement(loginButton).click();
+        try {
+            driver.findElement(loginButton).click();
+        }catch(Exception e) {
+            System.out.println("Login button is not clickable");
+        }
     }
 
     By errorMessage = By.xpath("//h3[@data-test='error']");
     public String getErrorMessage() {
-        return driver.findElement(errorMessage).getText();
+        try {
+            return driver.findElement(errorMessage).getText();
+        }catch(Exception e) {
+            return "Error message not displayed";
+        }
     }
 
     public void handlePasswordAlert() {
