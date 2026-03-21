@@ -1,7 +1,7 @@
 package com.testingacademy;
 
 /**
- * Hello world!
+ * Hello world!!
  *
  */
 public class App 
